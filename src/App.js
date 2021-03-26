@@ -13,7 +13,7 @@ import UserContext from './component/context/UserContext'
 import cookie from 'js-cookie'
 import axios from 'axios'
 import PrivateRoute from './component/router/Router'
-
+import FullPost from './component/page/FullPost'
 
 
 function App() {
@@ -68,10 +68,12 @@ axios.get('https://jsonplaceholder.typicode.com/users/1')
       <section style={{display: 'flex'}}>
         <SideBar/>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/post/:id" component={Post}/>
-          <Route path="/login" component={Login}/>
-          <PrivateRoute path="/profile" component={Profile}/>
+          <Route exact path="/"  component={Home} />
+          <Route exact path="/post" component={Post}/>
+          <Route exact path="/post/:id" component={FullPost}/>
+          <Route exact path="/login" component={Login}/>
+
+          <PrivateRoute exact path="/profile" component={Profile}/>
           
           <Route path="*" component={NoteFound}/>
         </Switch>

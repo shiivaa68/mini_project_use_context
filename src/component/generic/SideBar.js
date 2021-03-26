@@ -16,7 +16,7 @@ class SideBar extends Component {
                 <h3>my sidebar</h3>
                 <ul>
                     <li><NavLink exact to="/">HOME</NavLink></li>
-                    <li><NavLink to="/post/:id">POST</NavLink></li>
+                    <li><NavLink to="/post">POST</NavLink></li>
                     <li><NavLink to="/profile">PROFILE</NavLink></li>
                 </ul>
             </aside>
