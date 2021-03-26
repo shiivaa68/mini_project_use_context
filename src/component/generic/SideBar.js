@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import {NavLink} from 'react-router-dom'
 import './style/sidebar.css'
+import ThemeContext  from '../context/ThemeContext'
+
+
+
 
 class SideBar extends Component {
+
+
+    static contextType = ThemeContext
     render(){
         return(
             <aside style={{flex: 1, border: 'solid 1px', padding: '1em', margin: '1em', ...this.context}}>

@@ -1,9 +1,13 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import ThemeContext from '../context/ThemeContext'
 
 const Home  = () => {
+
+const theme = useContext(ThemeContext)
+
+
     return (
-        <article style={{flex: 3, border: 'solid 1px', padding: '1em', margin: '1em'}}>
+        <article style={{flex: 3, border: 'solid 1px', padding: '1em', margin: '1em',...theme}}>
             <h1>my home page</h1>
             <p> any text do you like you can write here !!!!!</p>
             <p>
