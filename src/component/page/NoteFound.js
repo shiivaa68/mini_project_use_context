@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {Link} from 'react-router-dom'
-import ThemeContext, { themes } from '../context/ThemeContext'
+import ThemeContext from '../context/ThemeContext'
 
 const NoteFound =() => {
 

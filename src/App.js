@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import Header from './component/generic/Header'
 import Footer from './component/generic/Footer'
@@ -10,6 +10,11 @@ import Post from './component/page/Post'
 import Profile from './component/page/Profile'
 import ThemeContext ,{themes} from './component/context/ThemeContext'
 import UserContext from './component/context/UserContext'
+import cookie from 'js-cookie'
+import axios from 'axios'
+import PrivateRoute from './component/router/Router'
+
+
 
 function App() {
 
@@ -20,10 +25,39 @@ const[authenticated,setAutinticated] = useState(false)
 
 
 
+useEffect(()=>{
+  cookie.get('token') ?login() :setLoading(false)
+} ,[])
+
+const login  = () => {
+setLoading(true)
+axios.get('https://jsonplaceholder.typicode.com/users/1')
+.then(response =>{
+ cookie.set('token','my-token',{expires:7})
+ setUser(response.data)
+ setAutinticated(true)
+ setLoading(false)
+})
+
+ }
+
+
+ const logOut = () => {
+   cookie.remove('token')
+   setUser({})
+   setAutinticated(false)
+
+ }
+
+ if(loading) {
+   return 'loading....'
+ }
+
+
   return (
     <div>
       <BrowserRouter>
-      <UserContext.Provider>
+      <UserContext.Provider value={{user,authenticated,login,logOut}}>
       <ThemeContext.Provider value={theme}>
 
 <div>
@@ -37,7 +71,7 @@ const[authenticated,setAutinticated] = useState(false)
           <Route path="/" exact component={Home} />
           <Route path="/post/:id" component={Post}/>
           <Route path="/login" component={Login}/>
-          <Route path="/profile" component={Profile}/>
+          <PrivateRoute path="/profile" component={Profile}/>
           
           <Route path="*" component={NoteFound}/>
         </Switch>
